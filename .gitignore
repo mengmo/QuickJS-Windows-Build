@@ -1,0 +1,10 @@
+.obj
+bin
+include
+lib
+*.a
+*.exe
+*.zip
+qjscalc.c
+repl.c
+repl-bn.c
