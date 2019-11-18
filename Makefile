@@ -24,9 +24,13 @@
 
 ifeq ($(shell uname -s),Darwin)
 CONFIG_DARWIN=y
+else ifeq (MINGW32,$(findstring MINGW32,$(shell uname -s)))
+CONFIG_WIN32=y
+else ifeq (MINGW64,$(findstring MINGW64,$(shell uname -s)))
+CONFIG_WIN64=y
 endif
 # Windows cross compilation from Linux
-CONFIG_WIN32=y
+#CONFIG_WIN32=y
 # use link time optimization (smaller and faster executables but slower build)
 CONFIG_LTO=y
 # consider warnings as errors (for development)
@@ -52,6 +56,9 @@ OBJDIR=.obj
 
 ifdef CONFIG_WIN32
   CROSS_PREFIX=i686-w64-mingw32-
+  EXE=.exe
+else ifdef CONFIG_WIN64
+  CROSS_PREFIX=x86_64-w64-mingw32-
   EXE=.exe
 else
   CROSS_PREFIX=
@@ -115,6 +122,8 @@ LDFLAGS+=-fsanitize=address
 endif
 ifdef CONFIG_WIN32
 LDEXPORT=
+else ifdef CONFIG_WIN64
+LDEXPORT=
 else
 LDEXPORT=-rdynamic
 endif
@@ -131,7 +140,9 @@ QJSC=./qjsc$(EXE)
 QJSBNC=./qjsbnc$(EXE)
 endif
 ifndef CONFIG_WIN32
-PROGS+=qjscalc
+ ifndef CONFIG_WIN64
+ PROGS+=qjscalc
+ endif
 endif
 ifdef CONFIG_M32
 PROGS+=qjs32 qjs32_s qjsbn32
@@ -165,7 +176,9 @@ QJSBN_OBJS=$(OBJDIR)/qjs.bn.o $(OBJDIR)/repl-bn.bn.o $(OBJDIR)/qjscalc.bn.o $(QJ
 
 LIBS=-lm
 ifndef CONFIG_WIN32
-LIBS+=-ldl
+ ifndef CONFIG_WIN64
+ LIBS+=-ldl
+ endif
 endif
 
 $(OBJDIR):
