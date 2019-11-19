@@ -33,7 +33,7 @@ make LDFLAGS="-static -s"
 ```
 zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2}).zip qjs.exe qjsbn.exe run-test262.exe run-test262-bn.exe
 mkdir ./bin
-mv qjs.exe qjsbn.exe qjsc.exe qjsbnc.exe ./bin
+mv qjs.exe qjsbn.exe qjsc.exe qjsbnc.exe run-test262.exe run-test262-bn.exe ./bin
 mkdir -p ./lib/quickjs
 mv libquickjs.a libquickjs.bn.a libquickjs.lto.a libquickjs.bn.lto.a ./lib/quickjs
 mkdir -p ./include/quickjs
