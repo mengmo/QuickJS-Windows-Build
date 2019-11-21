@@ -1,4 +1,10 @@
 # QuickJS Windows Build
+
+[![GitHub issues](https://img.shields.io/github/issues/mengmo/QuickJS-Windows-Build?logo=github)](https://github.com/mengmo/QuickJS-Windows-Build/issues)
+[![GitHub stars](https://img.shields.io/github/stars/mengmo/QuickJS-Windows-Build?logo=github)](https://github.com/mengmo/QuickJS-Windows-Build/stargazers)
+[![GitHub All Releases](https://img.shields.io/github/downloads/mengmo/QuickJS-Windows-Build/total?logo=github)](https://github.com/mengmo/QuickJS-Windows-Build/releases)
+[![GitHub license](https://img.shields.io/github/license/mengmo/QuickJS-Windows-Build?logo=open-source-initiative)](https://github.com/mengmo/QuickJS-Windows-Build/blob/master/LICENSE)
+
 Build [QuickJS](https://bellard.org/quickjs/) on Windows, and [binary releases](https://github.com/mengmo/QuickJS-Windows-Build/releases).
 
 ## Build Prerequisites
