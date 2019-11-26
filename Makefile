@@ -191,20 +191,20 @@ qjs-debug$(EXE): $(patsubst %.o, %.debug.o, $(QJS_OBJS))
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 qjsc$(EXE): $(OBJDIR)/qjsc.o $(QJS_LIB_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(LDFLAGS) $(LDEXPORT) -o $@ $^ $(LIBS)
 
 qjsbnc$(EXE): $(OBJDIR)/qjsc.bn.o $(QJSBN_LIB_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(CC) $(LDFLAGS) $(LDEXPORT) -o $@ $^ $(LIBS)
 
 ifneq ($(CROSS_PREFIX),)
 
 $(QJSC): $(OBJDIR)/qjsc.host.o \
     $(patsubst %.o, %.host.o, $(QJS_LIB_OBJS))
-	$(HOST_CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(HOST_CC) $(LDFLAGS) $(LDEXPORT) -o $@ $^ $(LIBS)
 
 $(QJSBNC): $(OBJDIR)/qjsc.bn.host.o \
     $(patsubst %.o, %.host.o, $(QJSBN_LIB_OBJS))
-	$(HOST_CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(HOST_CC) $(LDFLAGS) $(LDEXPORT) -o $@ $^ $(LIBS)
 
 endif #CROSS_PREFIX
 
@@ -274,10 +274,10 @@ libunicode-table.h: unicode_gen
 endif
 
 run-test262: $(OBJDIR)/run-test262.o $(QJS_LIB_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS) -lpthread
+	$(CC) $(LDFLAGS) $(LDEXPORT) -o $@ $^ $(LIBS) -lpthread
 
 run-test262-bn: $(OBJDIR)/run-test262.bn.o $(QJSBN_LIB_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS) -lpthread
+	$(CC) $(LDFLAGS) $(LDEXPORT) -o $@ $^ $(LIBS) -lpthread
 
 run-test262-debug: $(patsubst %.o, %.debug.o, $(OBJDIR)/run-test262.o $(QJS_LIB_OBJS))
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS) -lpthread
