@@ -7,7 +7,7 @@
 [![GitHub All Releases](https://img.shields.io/github/downloads/mengmo/QuickJS-Windows-Build/total?logo=github)](https://github.com/mengmo/QuickJS-Windows-Build/releases)
 [![GitHub license](https://img.shields.io/github/license/mengmo/QuickJS-Windows-Build?logo=open-source-initiative)](https://github.com/mengmo/QuickJS-Windows-Build/blob/master/LICENSE)
 
-Build [QuickJS](https://bellard.org/quickjs/) on Windows, and [binary releases](https://github.com/mengmo/QuickJS-Windows-Build/releases).
+Build [QuickJS](https://bellard.org/quickjs/) on Windows, and [prebuilt binary releases](https://github.com/mengmo/QuickJS-Windows-Build/releases).
 
 ## Build Prerequisites
 Install [MSYS2](http://www.msys2.org/)
@@ -34,7 +34,7 @@ git clone https://github.com/mengmo/QuickJS-Windows-Build.git
 ## Compilation
 ```
 cd QuickJS-Windows-Build
-make LDEXPORT="-static -s"
+make LDEXPORT="-Wl,-static,-s" LDEXTRAS="-Wl,-static,-s"
 ```
 
 ## Packaging
