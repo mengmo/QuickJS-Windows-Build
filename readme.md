@@ -53,3 +53,43 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 **[quickjs](https://github.com/PetterS/quickjs):** Thin Python wrapper of https://bellard.org/quickjs/
 
 **[jsvu](https://github.com/GoogleChromeLabs/jsvu):** install recent versions of various JavaScript engines without having to compile them from source.
+* * *
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**A method to generate `libquickjs.dll`, use at your own risk.**
+
+* Generating `libquickjs.dll` with `libquickjs.a`
+```
+  gcc -shared -o libquickjs.dll -Wl,--whole-archive,-static,-s libquickjs.a -Wl,-no-whole-archive
+```
+
+* Generating `libquickjs.dll` with `libquickjs.lto.a`
+```
+  gcc -shared -o libquickjs.dll -Wl,--whole-archive,-static,-s libquickjs.lto.a -Wl,-no-whole-archive
+```
+
+* Loading `libquickjs.dll` with [`ctypes`](https://docs.python.org/3/library/ctypes.html) from Python
+```
+  python
+  from ctypes import *
+  print(windll.libquickjs)
+  exit()
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Tips:**
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When trying to load `libquickjs.dll` outside `MSYS2`/`MINGW64`/`MINGW32`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if encountered `OSError: [Error 126] The specified module could not be found.`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try to find dlls that `libquickjs.dll` depends on with
+```
+  objdump -p libquickjs.dll | grep -E .dll
+  objdump -p libquickjs.dll | findstr /c:.dll
+```
+
+* A method to get a list of QuickJS Javascript Engine API
+```
+  objdump -p libquickjs.dll > libquickjs.txt
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`QuickJS Javascript Engine API list` located in `[Ordinal/Name Pointer] Table`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check `quickjs.h` to see what these APIs were defined for
