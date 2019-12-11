@@ -58,12 +58,12 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 
 * Generating `libquickjs.dll` with `libquickjs.a`
 ```
-  gcc -shared -o libquickjs.dll -Wl,--whole-archive,-static,-s libquickjs.a -Wl,-no-whole-archive
+  gcc -shared -o libquickjs.dll -static-libgcc -Wl,--whole-archive,-static,-s libquickjs.a -Wl,--no-whole-archive
 ```
 
 * Generating `libquickjs.dll` with `libquickjs.lto.a`
 ```
-  gcc -shared -o libquickjs.dll -Wl,--whole-archive,-static,-s libquickjs.lto.a -Wl,-no-whole-archive
+  gcc -shared -o libquickjs.dll -static-libgcc -Wl,--whole-archive,-static,-s libquickjs.lto.a -Wl,--no-whole-archive
 ```
 
 * Loading `libquickjs.dll` with [`ctypes`](https://docs.python.org/3/library/ctypes.html) from Python
@@ -74,7 +74,15 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
   exit()
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Tips:**
+* A method to get a list of QuickJS Javascript Engine API
+```
+  objdump -p libquickjs.dll > libquickjs_api_list.txt
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`QuickJS Javascript Engine API list` located in `[Ordinal/Name Pointer] Table`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check `quickjs.h` to see what these APIs were defined for
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Tips:** (I think there is no need to do this any more)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When trying to load `libquickjs.dll` outside `MSYS2`/`MINGW64`/`MINGW32`
 
@@ -85,11 +93,3 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
   objdump -p libquickjs.dll | grep -E .dll
   objdump -p libquickjs.dll | findstr /c:.dll
 ```
-
-* A method to get a list of QuickJS Javascript Engine API
-```
-  objdump -p libquickjs.dll > libquickjs.txt
-```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`QuickJS Javascript Engine API list` located in `[Ordinal/Name Pointer] Table`
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check `quickjs.h` to see what these APIs were defined for
