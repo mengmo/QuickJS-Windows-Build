@@ -8,3 +8,4 @@ lib
 qjscalc.c
 repl.c
 repl-bn.c
+libquickjs_api_list.txt
