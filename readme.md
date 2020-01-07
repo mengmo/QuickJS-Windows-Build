@@ -39,12 +39,12 @@ make LDEXPORT="-Wl,-static,-s" LDEXTRAS="-Wl,-static,-s"
 
 ## Packaging
 ```
-zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2}).zip qjs.exe qjsbn.exe run-test262.exe run-test262-bn.exe
+zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2}).zip qjs.exe run-test262.exe
 mkdir ./bin
-mv qjs.exe qjsbn.exe qjsc.exe qjsbnc.exe run-test262.exe run-test262-bn.exe ./bin
+mv qjs.exe qjsc.exe run-test262.exe ./bin
 mkdir -p ./lib/quickjs
-strip -g libquickjs.a libquickjs.bn.a
-mv libquickjs.a libquickjs.bn.a libquickjs.lto.a libquickjs.bn.lto.a ./lib/quickjs
+strip -g libquickjs.a
+mv libquickjs.a libquickjs.lto.a ./lib/quickjs
 mkdir -p ./include/quickjs
 cp -p quickjs.h quickjs-libc.h ./include/quickjs
 zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc ./examples ./include ./lib Changelog readme.txt TODO VERSION
