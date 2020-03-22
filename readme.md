@@ -34,7 +34,7 @@ git clone https://github.com/mengmo/QuickJS-Windows-Build.git
 ## Compilation
 ```
 cd QuickJS-Windows-Build
-make LDEXPORT="-Wl,-static,-s" LDEXTRAS="-Wl,-static,-s"
+make LDEXPORT="-static -s" LDEXTRAS="-static -s"
 ```
 
 ## Packaging
@@ -59,12 +59,12 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 
 * Generating `libquickjs.dll` with `libquickjs.a`
 ```
-  gcc -shared -o libquickjs.dll -static-libgcc -Wl,--whole-archive,-static,-s libquickjs.a -lm -Wl,--no-whole-archive
+  gcc -shared -o libquickjs.dll -static -s -Wl,--whole-archive libquickjs.a -lm -Wl,--no-whole-archive
 ```
 
 * Generating `libquickjs.dll` with `libquickjs.lto.a`
 ```
-  gcc -shared -o libquickjs.dll -static-libgcc -Wl,--whole-archive,-static,-s libquickjs.lto.a -lm -Wl,--no-whole-archive
+  gcc -shared -o libquickjs.dll -static -s -Wl,--whole-archive libquickjs.lto.a -lm -Wl,--no-whole-archive
 ```
 
 * Loading `libquickjs.dll` with [`ctypes`](https://docs.python.org/3/library/ctypes.html) from Python
