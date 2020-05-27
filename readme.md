@@ -53,6 +53,10 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 ## Related Projects
 **[quickjs](https://github.com/PetterS/quickjs):** Thin Python wrapper of https://bellard.org/quickjs/
 
+**[QuickJSPP](https://github.com/ftk/quickjspp):** QuickJS wrapper for C++.
+
+**[QuickJS-Pascal](https://github.com/Coldzer0/QuickJS-Pascal):** Quickjs FreePascal / Delphi Bindings
+
 **[jsvu](https://github.com/GoogleChromeLabs/jsvu):** install recent versions of various JavaScript engines without having to compile them from source.
 * * *
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**A method to generate `libquickjs.dll`, use at your own risk.**
