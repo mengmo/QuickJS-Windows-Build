@@ -57,6 +57,10 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 
 **[QuickJS-Pascal](https://github.com/Coldzer0/QuickJS-Pascal):** Quickjs FreePascal / Delphi Bindings
 
+**[quickjs-rs](https://github.com/theduke/quickjs-rs):** A Rust wrapper for QuickJS.
+
+**[QuickJS.NET](https://github.com/vmas/QuickJS.NET):** C# bindings for QuickJS
+
 **[jsvu](https://github.com/GoogleChromeLabs/jsvu):** install recent versions of various JavaScript engines without having to compile them from source.
 * * *
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**A method to generate `libquickjs.dll`, use at your own risk.**
