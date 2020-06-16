@@ -62,6 +62,8 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 **[QuickJS.NET](https://github.com/vmas/QuickJS.NET):** C# bindings for QuickJS
 
 **[jsvu](https://github.com/GoogleChromeLabs/jsvu):** install recent versions of various JavaScript engines without having to compile them from source.
+
+**[esvu](https://github.com/devsnek/esvu):** your one-stop shop for all implementations of ECMAScript.
 * * *
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**A method to generate `libquickjs.dll`, use at your own risk.**
 
