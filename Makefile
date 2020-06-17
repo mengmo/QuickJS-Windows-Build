@@ -127,8 +127,10 @@ LDFLAGS+=-fsanitize=address
 endif
 ifdef CONFIG_WIN32
 LDEXPORT=
+LDEXTRAS=$(LDEXPORT)
 else ifdef CONFIG_WIN64
 LDEXPORT=
+LDEXTRAS=$(LDEXPORT)
 else
 LDEXPORT=-rdynamic
 endif

@@ -34,7 +34,7 @@ git clone https://github.com/mengmo/QuickJS-Windows-Build.git
 ## Compilation
 ```
 cd QuickJS-Windows-Build
-make LDEXPORT="-static -s" LDEXTRAS="-static -s"
+make LDEXPORT="-static -s"
 ```
 
 ## Packaging
