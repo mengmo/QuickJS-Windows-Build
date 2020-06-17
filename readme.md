@@ -9,6 +9,8 @@
 
 Build [QuickJS](https://bellard.org/quickjs/) on Windows, and [prebuilt binary releases](https://github.com/mengmo/QuickJS-Windows-Build/releases).
 
+*Since all the modifications only affect build behaviors on Windows, you can also use this repository on Linux.*
+
 ## Build Prerequisites
 Install [MSYS2](http://www.msys2.org/)
 
