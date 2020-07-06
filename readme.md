@@ -16,14 +16,14 @@ Install [MSYS2](http://www.msys2.org/)
 
 If build 64-bit QuickJS with `MINGW64`, install `x86_64-toolchain`
 ```
-pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-dlfcn
 echo "#! /bin/sh" > /mingw64/bin/make
 echo "\"mingw32-make\" \"\$@\"" >> /mingw64/bin/make
 ```
 
 If build 32-bit QuickJS with `MINGW32`, install `i686-toolchain`
 ```
-pacman -S mingw-w64-i686-gcc mingw-w64-i686-make
+pacman -S mingw-w64-i686-gcc mingw-w64-i686-make mingw-w64-i686-dlfcn
 echo "#! /bin/sh" > /mingw32/bin/make
 echo "\"mingw32-make\" \"\$@\"" >> /mingw32/bin/make
 ```
