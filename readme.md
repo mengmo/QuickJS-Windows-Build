@@ -38,6 +38,12 @@ git clone https://github.com/mengmo/QuickJS-Windows-Build.git
 cd QuickJS-Windows-Build
 make LDEXPORT="-static -s"
 ```
+workaroud for **qjsc**
+```
+./qjsc -o hello examples/hello.js
+gcc -D_GNU_SOURCE -I./ -o hello out*****.c -static -s -L./ -lquickjs -lm -ldl -lpthread
+./hello
+```
 
 ## Packaging
 ```
