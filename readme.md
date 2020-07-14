@@ -40,8 +40,8 @@ make LDEXPORT="-static -s"
 ```
 workaroud for **qjsc**
 ```
-./qjsc -o hello examples/hello.js
-gcc -D_GNU_SOURCE -I./ -o hello out*****.c -static -s -L./ -lquickjs -lm -ldl -lpthread
+./qjsc -e -o hello.c examples/hello.js
+gcc -D_GNU_SOURCE -I./ -o hello hello.c -static -s -L./ -lquickjs -lm -ldl -lpthread
 ./hello
 ```
 
