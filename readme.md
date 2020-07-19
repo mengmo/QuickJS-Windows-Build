@@ -65,6 +65,8 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 
 **[QuickJS-Pascal](https://github.com/Coldzer0/QuickJS-Pascal):** Quickjs FreePascal / Delphi Bindings
 
+**[quickjs](https://github.com/lithdew/quickjs):** Go bindings to QuickJS: a fast, small, and embeddable ES2020 JavaScript interpreter.
+
 **[quickjs-rs](https://github.com/theduke/quickjs-rs):** A Rust wrapper for QuickJS.
 
 **[QuickJS.NET](https://github.com/vmas/QuickJS.NET):** C# bindings for QuickJS
