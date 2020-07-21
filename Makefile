@@ -31,6 +31,7 @@ CONFIG_WIN64=y
 endif
 # Windows cross compilation from Linux
 #CONFIG_WIN32=y
+#CONFIG_WIN64=y
 # use link time optimization (smaller and faster executables but slower build)
 CONFIG_LTO=y
 # consider warnings as errors (for development)
@@ -62,6 +63,7 @@ ifdef CONFIG_WIN32
 else ifdef CONFIG_WIN64
   CROSS_PREFIX=x86_64-w64-mingw32-
   EXE=.exe
+  CONFIG_WIN32=y
 else
   CROSS_PREFIX=
   EXE=
@@ -107,9 +109,7 @@ ifdef CONFIG_BIGNUM
 DEFINES+=-DCONFIG_BIGNUM
 endif
 ifdef CONFIG_WIN32
- ifndef CONFIG_WIN64
- DEFINES+=-D__USE_MINGW_ANSI_STDIO # for standard snprintf behavior
- endif
+DEFINES+=-D__USE_MINGW_ANSI_STDIO # for standard snprintf behavior
 endif
 
 CFLAGS+=$(DEFINES)
@@ -134,9 +134,6 @@ endif
 ifdef CONFIG_WIN32
 LDEXPORT=
 LDEXTRAS=$(LDEXPORT)
-else ifdef CONFIG_WIN64
-LDEXPORT=
-LDEXTRAS=$(LDEXPORT)
 else
 LDEXPORT=-rdynamic
 endif
@@ -151,9 +148,7 @@ QJSC_CC=$(CC)
 QJSC=./qjsc$(EXE)
 endif
 ifndef CONFIG_WIN32
- ifndef CONFIG_WIN64
- PROGS+=qjscalc
- endif
+PROGS+=qjscalc
 endif
 ifdef CONFIG_M32
 PROGS+=qjs32 qjs32_s
@@ -188,9 +183,7 @@ endif
 HOST_LIBS=-lm -ldl -lpthread
 LIBS=-lm
 ifndef CONFIG_WIN32
- ifndef CONFIG_WIN64
- LIBS+=-ldl -lpthread
- endif
+LIBS+=-ldl -lpthread
 endif
 
 $(OBJDIR):
