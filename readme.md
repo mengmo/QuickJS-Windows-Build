@@ -74,6 +74,12 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 **[jsvu](https://github.com/GoogleChromeLabs/jsvu):** install recent versions of various JavaScript engines without having to compile them from source.
 
 **[esvu](https://github.com/devsnek/esvu):** your one-stop shop for all implementations of ECMAScript.
+
+#### Some efforts to make QuickJS compatible with MSVC
+
+**[QuickJS Javascript Engine](https://github.com/c-smile/quickjs/):** QuickJS Javascript engine, MS Visual Studio port.
+
+**[AcidJS](https://github.com/LemonHX/AcidJS):** a fork of QuickJS that compatible with MSVC and using CMAKE to compile.
 * * *
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**A method to generate `libquickjs.dll`, use at your own risk.**
 
