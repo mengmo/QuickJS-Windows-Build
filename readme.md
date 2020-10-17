@@ -77,7 +77,7 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 
 #### Some efforts to make QuickJS compatible with MSVC
 
-**[QuickJS Javascript Engine](https://github.com/c-smile/quickjs/):** QuickJS Javascript engine, MS Visual Studio port.
+**[QuickJS Javascript Engine](https://github.com/c-smile/quickjspp):** QuickJS Javascript engine, MS Visual Studio port.
 
 **[AcidJS](https://github.com/LemonHX/AcidJS):** a fork of QuickJS that compatible with MSVC and using CMAKE to compile.
 * * *
