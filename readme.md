@@ -109,7 +109,7 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check `quickjs.h` to see what these APIs were defined for
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Tips:** (I think there is no need to do this any more)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Tips:** (I think there is no need to do following any more)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When trying to load `libquickjs.dll` outside `MSYS2`/`MINGW64`/`MINGW32`
 
@@ -119,4 +119,15 @@ zip -9 -r quickjs-$(cat version)-win$(echo ${MSYSTEM:0-2})-all.zip ./bin ./doc .
 ```
   objdump -p libquickjs.dll | grep -E .dll
   objdump -p libquickjs.dll | findstr /c:.dll
+```
+
+* An alternative way to `make`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Launch Command Prompt as Administrator**
+```
+  cd /d …\msys64\mingw64\bin
+  mklink make.exe mingw32-make.exe
+
+  cd /d …\msys64\mingw32\bin
+  mklink make.exe mingw32-make.exe
 ```
