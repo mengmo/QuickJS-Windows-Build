@@ -26,12 +26,12 @@ ifeq ($(shell uname -s),Darwin)
 CONFIG_DARWIN=y
 else ifeq (MINGW32,$(findstring MINGW32,$(shell uname -s)))
 CONFIG_WIN32=y
+CONFIG_M32=y
 else ifeq (MINGW64,$(findstring MINGW64,$(shell uname -s)))
-CONFIG_WIN64=y
+CONFIG_WIN32=y
 endif
 # Windows cross compilation from Linux
 #CONFIG_WIN32=y
-#CONFIG_WIN64=y
 # use link time optimization (smaller and faster executables but slower build)
 CONFIG_LTO=y
 # consider warnings as errors (for development)
@@ -58,12 +58,12 @@ CONFIG_BIGNUM=y
 OBJDIR=.obj
 
 ifdef CONFIG_WIN32
-  CROSS_PREFIX=i686-w64-mingw32-
+  ifdef CONFIG_M32
+    CROSS_PREFIX=i686-w64-mingw32-
+  else
+    CROSS_PREFIX=x86_64-w64-mingw32-
+  endif
   EXE=.exe
-else ifdef CONFIG_WIN64
-  CROSS_PREFIX=x86_64-w64-mingw32-
-  EXE=.exe
-  CONFIG_WIN32=y
 else
   CROSS_PREFIX=
   EXE=
@@ -151,7 +151,9 @@ ifndef CONFIG_WIN32
 PROGS+=qjscalc
 endif
 ifdef CONFIG_M32
+ifndef CONFIG_WIN32
 PROGS+=qjs32 qjs32_s
+endif
 endif
 PROGS+=libquickjs.a
 ifdef CONFIG_LTO
@@ -291,15 +293,12 @@ $(OBJDIR)/%.check.o: %.c | $(OBJDIR)
 regexp_test: libregexp.c libunicode.c cutils.c
 	$(CC) $(LDFLAGS) $(CFLAGS) -DTEST -o $@ libregexp.c libunicode.c cutils.c $(LIBS)
 
-jscompress: jscompress.c
-	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ jscompress.c
-
 unicode_gen: $(OBJDIR)/unicode_gen.host.o $(OBJDIR)/cutils.host.o libunicode.c unicode_gen_def.h
 	$(HOST_CC) $(LDFLAGS) $(CFLAGS) -o $@ $(OBJDIR)/unicode_gen.host.o $(OBJDIR)/cutils.host.o
 
 clean:
 	rm -f repl.c qjscalc.c out.c
-	rm -f *.a *.o *.d *~ jscompress unicode_gen regexp_test $(PROGS)
+	rm -f *.a *.o *.d *~ unicode_gen regexp_test $(PROGS)
 	rm -f hello.c test_fib.c
 	rm -f examples/*.so tests/*.so
 	rm -rf $(OBJDIR)/ *.dSYM/ qjs-debug
@@ -334,11 +333,13 @@ hello.c: $(QJSC) $(HELLO_SRCS)
 	$(QJSC) -e $(HELLO_OPTS) -o $@ $(HELLO_SRCS)
 
 ifdef CONFIG_M32
+ifndef CONFIG_WIN32
 examples/hello: $(OBJDIR)/hello.m32s.o $(patsubst %.o, %.m32s.o, $(QJS_LIB_OBJS))
 	$(CC) -m32 $(LDFLAGS) -o $@ $^ $(LIBS)
 else
 examples/hello: $(OBJDIR)/hello.o $(QJS_LIB_OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+endif
 endif
 
 # example of static JS compilation with modules
@@ -389,7 +390,9 @@ ifndef CONFIG_DARWIN
 test: tests/bjson.so examples/point.so
 endif
 ifdef CONFIG_M32
+ifndef CONFIG_WIN32
 test: qjs32
+endif
 endif
 
 test: qjs
@@ -413,6 +416,7 @@ ifdef CONFIG_BIGNUM
 	./qjs --qjscalc tests/test_qjscalc.js
 endif
 ifdef CONFIG_M32
+ifndef CONFIG_WIN32
 	./qjs32 tests/test_closure.js
 	./qjs32 tests/test_language.js
 	./qjs32 tests/test_builtin.js
@@ -423,6 +427,7 @@ ifdef CONFIG_BIGNUM
 	./qjs32 --bignum tests/test_op_overloading.js
 	./qjs32 --bignum tests/test_bignum.js
 	./qjs32 --qjscalc tests/test_qjscalc.js
+endif
 endif
 endif
 
